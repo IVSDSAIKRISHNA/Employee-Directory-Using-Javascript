@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title> Saketa </title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script> -->
+        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+    </head>
+    <body onload="rendering_employees()">
+        <div class="header">
+            <div class="header_companyinfo">
+                <img src="../assets/logo.png" class="header_logo">
+                <div class="header_product_name">saketa</div>
+                <div class="header_pagename">
+                    <div class="header_mainname">Employee Directory </div>
+                    <div class="header_pagename_caption"> The Ultimate People Directory Experience</div>
+                </div>
+            </div>
+            <div class="header_userinfo">
+                <div class="header_mainname welcome"> Welcome,</div>
+                <div class="header_username">Andrew Philips</div>
+                <img class="header_logo" src="../assets/userphoto.png" alt="">
+            </div>
+        </div>
+        <hr>
+        <div class="primary">
+            <div class="sidebar">
+                <div class="sidebar_departments">
+                    <ul>
+                        <li>Departments</li>
+                        <li><button title="IT Department" value="6" onclick="Deptfilter(this.title)">IT(6)</button></li>
+                        <li><button title="HR Department" value="1"onclick="Deptfilter(this.title)">Human Resources(1)</button></li>
+                        <li><button title="MD" value="0"onclick="Deptfilter(this.title)">MD</button></li>
+                        <li><button title="Sales " value="0"onclick="Deptfilter(this.title)">Sales</button></li>
+                   </ul>
+                </div>
+                <div class="sidebar_offices">
+                    <ul>
+                        <li>Offices</li>
+                        <li><button>Seattale</button></li>
+                        <li><button>India</button></li>
+                    </ul>
+                </div>
+                <div class="sidebar_jobtitles">
+                    <ul>
+                        <li>Job Titles</li>
+                        <li><button  title="SharePoint Practice Head"  value="1" onclick="Jobfilter(this.title)">Share Point Practice Head(1)</button></li>
+                        <li><button  title=".Net Developemtn Head"  value="0"onclick="Jobfilter(this.title)">.Net Development Head</button></li>
+                        <li><button  title="Recruting Expert" value="0"onclick="Jobfilter(this.title)">Recruting Expert </button></li>
+                        <li><button  title=" BI Developer " value="0"onclick="Jobfilter(this.title)">BI Developer</button></li>
+                        <li><button  title=" Business Analyst" value="0"onclick="Jobfilter(this.title)">Business Analyst</button></li>
+                        <div id="sidebar_viewmore"><li><button class="bluetext" onclick="viewmore()">view more </button></li></div>
+                        <div id="viewmore_options">
+                           <li><button title="Network Engineer" value="1" class="customchild" onclick="Jobfilter(this.title)">Network Engineer(1)</button><li>
+                            <li><button title="Operations Manager" value="1" onclick="Jobfilter(this.title)">Operations Manager(1)</button></li>
+                            <li><button title="Software Engineer" value="1" onclick="Jobfilter(this.title)">Software Engineer(1)</button></li>
+                            <li><button class="bluetext" onclick="viewless()">View Less</button></li>
+                        </div>
+                   </ul>
+                </div>
+            </div>
+            <div class="directory">
+                <div class="directory_buttongroup">
+                         <button type="button" class="btn btn-primary  btn-lg my-1 mx-1" onclick="buttonfilterreversal()"><i class='fa fa-user' style='font-size:30px;color:white'></i></button>
+                </div>
+                <div class="directory_searcharea">
+                    <label class="directory_searchbarlabel" >Search</label>
+                    <div class="directory_input">
+                        <form>
+                       <span  onclick="Searchbar()"><i class="fa fa-search" style="font-size:36px"></i></span>
+                        <input type="search" onkeypress="keyp(event)" class="searchbar_input" id="searchbar" placeholder="Enter Any KeyWord">
+                        </form>
+                    </div>
+                    <button  class="directory_clearbutton" onclick="clearbutton()"> Clear</button>
+                    <div class="directory_filter">
+                         <label class="directory_searchbarlabel filter">Filter By</label>
+                         <div class="dropdown">
+                            <select class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <option value="0">None</option>
+                            <option class="dropdown-item" value="1">Preffered Name</option>
+                            <option class="dropdown-item" value="2">Designation </option>
+                            <option class="dropdown-item" value="3">Departments </option>
+                            </div>
+                           </select> 
+                          </div>
+                    </div>
+
+                    <div class="directory_addemployee">
+                            <button class="btn btn-primary btn-lg" type="button" data-bs-toggle="modal" data-bs-target="#addemployeeModal"> Add Employee</button>
+                            <div class="modal fade" id="addemployeeModal" tabindex="-1" aria-labelledby="addemployeeModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="addemployeeModalLabel">Add Employee</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form >
+                                                <div class="mb-3">
+                                                    <label for="FirstName" class="form-label">First Name </label>
+                                                    <input type="text" class="form-control" id="FirstName">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="LastName" class="form-label">last Name </label>
+                                                    <input type="text" class="form-control" id="LastName">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="UserName" class="form-label">Preffered UserName </label>
+                                                    <input type="text" class="form-control" id="UserName">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="Email" class="form-label">Email</label>
+                                                    <input type="email" class="form-control" id="Email" aria-describedby="emailHelp">
+                                                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="JobTitle" class="form-label">Job Title</label>
+                                                    <input type="text" class="form-control" id="JobTitle">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="Office" class="form-label">Office</label>
+                                                    <input type="text" class="form-control" id="Office">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="Dept" class="form-label">Department</label>
+                                                    <select  class="form-control" id="Dept">
+                                                        <option>IT Department </option>
+                                                        <option>HR Department </option>
+                                                        <option>MD </option>
+                                                        <option>Sales </option>
+                                                    </select>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="phonenumber" class="form-label">Phone Number</label>
+                                                    <input type="text" class="form-control" id="phonenumber">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="Skypeid" class="form-label">Skype Id</label>
+                                                    <input type="text" class="form-control" id="Skypeid">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <button type="button" class="btn btn-danger" data-bs-ismiss="modal" onclick="modalsubmit()">Submit</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="modalclose()">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="directory_note"><label class="directory_note_label">Note:</label> Please Use the Advanced Filter Option to Refine your Results</div>
+                <div class="directory_employee">
+                    <div class="employee_failsearch">No Results Found !!!</div>
+                    <div class="existing_employee_data" id="parent"></div>
+                    <div class="employee_details">
+                        <div id="employee_photo">
+                        </div>
+                        <div id="newemployee_info">
+                            <div class="neweployee_name"></div>
+                            <div class="newemployee_designation"></div>
+                            <div class="newemployee_department"></div>
+                            <div class="btn btn-success btn-lg mx-5 px-3" id="employee_editbutton"  onclick="editemployeedetails(event)"> Edit</div>  
+                            <div class="modal fade" id="editemployeeModal" tabindex="10" aria-labelledby="editemployeeModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="addemployeeModalLabel">Add Employee</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form >
+                                                <div class="mb-3">
+                                                    <label for="FirstName" class="form-label">First Name </label>
+                                                    <input type="text" class="form-control" id="FirstName">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="LastName" class="form-label">last Name </label>
+                                                    <input type="text" class="form-control" id="LastName">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="UserName" class="form-label">Preffered UserName </label>
+                                                    <input type="text" class="form-control" id="UserName">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="Email" class="form-label">Email</label>
+                                                    <input type="email" class="form-control" id="Email" aria-describedby="emailHelp">
+                                                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="JobTitle" class="form-label">Job Title</label>
+                                                    <input type="text" class="form-control" id="JobTitle">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="Office" class="form-label">Office</label>
+                                                    <input type="text" class="form-control" id="Office">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="Dept" class="form-label">Department</label>
+                                                    <select  class="form-control" id="Dept">
+                                                        <option>IT Department </option>
+                                                        <option>HR Department </option>
+                                                        <option>MD </option>
+                                                        <option>Sales </option>
+                                                    </select>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="phonenumber" class="form-label">Phone Number</label>
+                                                    <input type="text" class="form-control" id="phonenumber">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="Skypeid" class="form-label">Skype Id</label>
+                                                    <input type="text" class="form-control" id="Skypeid">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <button type="button" class="btn btn-danger" data-bs-ismiss="modal" onclick="modalsubmit()">Submit</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="modalclose()">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="btn btn-danger btn-lg " id="employee_closebutton" onclick="closebutton()"> Close </div>
+                        <span class="btn btn-danger  btn-lg mx-5" id="employee_submitbutton" onclick="newdetails_submit()">Submit</span>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+        <link rel="stylesheet" href="../styles/styles.css">
+        <script src="../scripts/script.js" async defer></script>
+        <!-- CSS only -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+        <!-- JavaScript Bundle with Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+        <!-- <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script> -->
+        <link rel="stylesheet" href="../styles/styles.css">
+    </body>
+</html>
